@@ -25,3 +25,36 @@ void ACoinDispatcher::Tick(float DeltaTime)
 
 }
 
+FVector ACoinDispatcher::GetComplexCoinLocation(){
+	FVector Result;
+	
+	FRandomStream rand;
+	rand.GenerateNewSeed();
+
+	FVector RandomUnitVector = rand.GetUnitVector();
+
+	if (ShowDebugPoints) {
+		UE_LOG(
+			LogTemp,
+			Warning,
+			TEXT("The location of the point is: %s"),
+			*RandomUnitVector.ToString()
+		);
+	}
+
+	FVector RandomLocationAtDistance = RandomUnitVector * DistanceFromCenter;
+
+	Result = GetActorLocation() + RandomLocationAtDistance;
+	Result.Z = GetActorLocation().Z;
+
+	if (ShowDebugPoints) {
+		DrawDebugPoint(
+			GetWorld(),
+			Result,
+			10,
+			FColor::Red,
+			true);
+	};
+
+	return Result;
+}

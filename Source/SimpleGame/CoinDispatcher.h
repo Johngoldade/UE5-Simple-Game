@@ -23,6 +23,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	FVector GetComplexCoinLocation();
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float DistanceFromCenter = 2000;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Debug")
+	bool ShowDebugPoints = false;
 };
